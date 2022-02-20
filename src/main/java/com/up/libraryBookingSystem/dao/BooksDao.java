@@ -1,0 +1,5 @@
+package com.up.libraryBookingSystem.dao;
+
+public interface BooksDao {
+
+}
