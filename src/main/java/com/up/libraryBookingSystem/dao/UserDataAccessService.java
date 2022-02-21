@@ -36,7 +36,7 @@ public class UserDataAccessService implements UserDao{
                 SELECT name, username, isManager,
                 FROM users 
                 WHERE user_id = ?
-                """;
+                """; //not including password as we don't want password to be easily accessible for security reasons
         RowMapper<Users> usersRowMapper = ((rs, rowNum) -> {
             Users user = new Users(
                     rs.getInt("user_id"),
@@ -51,7 +51,6 @@ public class UserDataAccessService implements UserDao{
         return users;
     }
 
-
     @Override
     public int deleteUser(Integer userId) {
         String sql = """
@@ -63,13 +62,37 @@ public class UserDataAccessService implements UserDao{
     }
 
     @Override
-    public int updateUser(Integer UserId, Users UserUpdate) {
-        return 0;
+    public Users selectUserById(Integer userId) {
+
+        String sql = """
+                SELECT user_id, name, username, isManager
+                FROM users
+                WHERE user_id = ?
+                """;
+        for (int i = 0; i < selectAllUsers().size() ; i++) {
+            if (selectAllUsers().get(i).getSerialID().equals(userId)){
+                return selectAllUsers().get(i);
+            }
+        }
+        return null;
     }
 
     @Override
-    public List<Users> selectUserById(Integer UserId) {
-        return null;
+    public int updateUser(Integer userId, Users userUpdate){
+        String sql = """
+                UPDATE users 
+                SET (name, username, isManager, password) = (?, ?, ?, ?)    
+                WHERE userId = ?            
+                """;
+        return jdbcTemplate.update(
+                sql,
+                userUpdate.getName(),
+                userUpdate.getUsername(),
+                userUpdate.getManager(),
+                userUpdate.getPassword()
+        );
     }
+
+
 }
 //test for branching

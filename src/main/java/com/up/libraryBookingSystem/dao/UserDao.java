@@ -13,5 +13,6 @@ public interface UserDao {
 
     int updateUser(Integer userId, Users userUpdate);
 
-    List<Users> selectUserById(Integer userId);
+    Users selectUserById(Integer userId);
+
 }
