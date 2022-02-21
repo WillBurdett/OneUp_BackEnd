@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class Books {
 
-    private Integer serialID;
+    private Integer bookId;
     private String title;
     private GENRES genre;
     private String author;
@@ -14,8 +14,8 @@ public class Books {
     private boolean loaned;
     private int ISBN;
 
-    public Books(Integer serialID, String title, GENRES genre, String author, Integer userID, boolean loaned, int ISBN) {
-        this.serialID = serialID;
+    public Books(String title, GENRES genre, String author, boolean loaned, int ISBN) {
+        this.bookId = bookId;
         this.title = title;
         this.genre = genre;
         this.author = author;
@@ -24,12 +24,12 @@ public class Books {
         this.ISBN = ISBN;
     }
 
-    public Integer getSerialID() {
-        return serialID;
+    public Integer getBookId() {
+        return bookId;
     }
 
-    public void setSerialID(Integer serialID) {
-        this.serialID = serialID;
+    public void setBookId(Integer serialID) {
+        this.bookId = bookId;
     }
 
     public String getTitle() {
@@ -85,18 +85,18 @@ public class Books {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Books books = (Books) o;
-        return loaned == books.loaned && ISBN == books.ISBN && Objects.equals(serialID, books.serialID) && Objects.equals(title, books.title) && genre == books.genre && Objects.equals(author, books.author) && Objects.equals(userID, books.userID);
+        return loaned == books.loaned && ISBN == books.ISBN && Objects.equals(bookId, books.bookId) && Objects.equals(title, books.title) && genre == books.genre && Objects.equals(author, books.author) && Objects.equals(userID, books.userID);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(serialID, title, genre, author, userID, loaned, ISBN);
+        return Objects.hash(bookId, title, genre, author, userID, loaned, ISBN);
     }
 
     @Override
     public String toString() {
         return "Books{" +
-                "serialID=" + serialID +
+                "serialID=" + bookId +
                 ", title='" + title + '\'' +
                 ", genre=" + genre +
                 ", author='" + author + '\'' +
