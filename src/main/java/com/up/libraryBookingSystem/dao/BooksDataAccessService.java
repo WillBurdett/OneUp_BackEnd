@@ -7,6 +7,7 @@ import java.util.List;
 
 public class BooksDataAccessService implements BooksDao {
 
+
     @Override
     public int addBook() {
         return 0;
@@ -28,7 +29,7 @@ public class BooksDataAccessService implements BooksDao {
     }
 
     @Override
-    public List<Books> selectBookById(Integer BookId) {
-        return null;
+    public boolean selectBookById(Integer BookId) {
+        return true;
     }
 }

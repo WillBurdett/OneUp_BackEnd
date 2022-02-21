@@ -13,5 +13,5 @@ public interface BooksDao {
 
     int updateBook(Integer BookId, Books bookUpdate);
 
-    List<Books> selectBookById(Integer BookId);
+    boolean selectBookById(Integer BookId);
 }
