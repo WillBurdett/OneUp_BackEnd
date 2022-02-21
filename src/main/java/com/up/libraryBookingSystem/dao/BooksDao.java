@@ -11,6 +11,8 @@ public interface BooksDao {
 
     Books selectBookById(Integer BookId);
 
+    Books selectBookByTitle(String bookTitle);
+
     int addBook(Books book);
 
     List<Books> displayBooks();

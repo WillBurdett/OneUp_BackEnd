@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.util.List;
+import java.util.Locale;
 
 public class BooksDataAccessService implements BooksDao {
 
@@ -17,10 +18,23 @@ public class BooksDataAccessService implements BooksDao {
     }
 
     @Override
-    public Books selectBookById(Integer BookId) {
+    public Books selectBookById(Integer bookId) {
 
         for (int i = 0; i < displayBooks().size() ; i++) {
-            if (displayBooks().get(i).getBookId().equals(BookId)){
+            if (displayBooks().get(i).getBookId().equals(bookId)){
+                return displayBooks().get(i);
+            }
+        }
+        return null;
+    }
+    @Override
+    public Books selectBookByTitle(String bookTitle) {
+
+        for (int i = 0; i < displayBooks().size() ; i++) {
+            if (displayBooks().get(i).getTitle().equals(bookTitle
+//                    .toLowerCase(Locale.ROOT)
+//                    .toUpperCase(Locale.ROOT)
+            )){
                 return displayBooks().get(i);
             }
         }

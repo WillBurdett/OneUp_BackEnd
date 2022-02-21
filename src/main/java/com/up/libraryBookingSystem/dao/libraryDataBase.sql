@@ -14,6 +14,7 @@ CREATE TABLE books (
     title VARCHAR(255) NOT NULL,
     genre VARCHAR(255) NOT NULL,
     author_id INT REFERENCES authors(author_id),
+    user_id INT REFERENCES users(user_id),
     loaned BOOLEAN NOT NULL,
     ISBN INT NOT NULL
 );

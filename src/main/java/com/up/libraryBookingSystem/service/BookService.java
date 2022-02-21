@@ -10,9 +10,16 @@ public class BookService {
         this.booksDao = booksDao;
     }
 
-    public void addBook(Books book) {
+    //adding book
+   //todo: check if book already exists
+   //todo: check that every field is filled (not null)
 
-    }
+    //deleting book
+    //todo: check if book already exists
+    //todo: check if book is on loan (don't delete if loaned)
+
+    //updating book -used to assign (loan) book to user
+    //todo: check if book is on loan
     }
 
 
