@@ -9,6 +9,11 @@ public class BooksDataAccessService implements BooksDao {
 
 
     @Override
+    public int addBooks() {
+        return 0;
+    }
+
+    @Override
     public int addBook() {
         return 0;
     }

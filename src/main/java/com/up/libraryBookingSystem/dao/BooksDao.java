@@ -4,7 +4,9 @@ import com.up.libraryBookingSystem.pojo.Books;
 
 import java.util.List;
 
-public interface BooksDao {
+public interface BooksDao{
+    int addBooks();
+
     int addBook();
 
     List<Books> selectAllBooks();
