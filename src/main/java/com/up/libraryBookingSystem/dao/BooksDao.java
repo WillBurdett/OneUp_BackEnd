@@ -5,13 +5,14 @@ import com.up.libraryBookingSystem.pojo.Books;
 import java.util.List;
 
 public interface BooksDao {
-    int addBook();
-
-    List<Books> selectAllBooks();
-
     int deleteBook(Integer BookId);
 
     int updateBook(Integer BookId, Books bookUpdate);
 
-    List<Books> selectBookById(Integer BookId);
+    Books selectBookById(Integer BookId);
+
+    int addBook(Books book);
+
+    List<Books> displayBooks();
+
 }
