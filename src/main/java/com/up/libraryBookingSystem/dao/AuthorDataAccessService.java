@@ -1,5 +1,6 @@
 package com.up.libraryBookingSystem.dao;
 
+import com.up.libraryBookingSystem.ENUMS.GENRES;
 import com.up.libraryBookingSystem.ENUMS.Nationality;
 import com.up.libraryBookingSystem.pojo.Authors;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -19,21 +20,47 @@ public class AuthorDataAccessService implements AuthorsDao{
 
     @Override
     public Authors selectAuthorById(Integer authorId) {
+
+//        String sql = """
+//                SELECT author_id, name, nationality, image
+//                FROM authors
+//                WHERE author_id = ?
+//                """;
+        for (int i = 0; i < displayAuthors().size() ; i++) {
+            if (displayAuthors().get(i).getAuthorId().equals(authorId)){
+                return displayAuthors().get(i);
+            }
+
+        }
+
+
         return null;
     }
 
 
     @Override
-    public int addAuthors() {
+    public int addAuthors(Authors author) {
 
-        return 0;
+        String sql= """
+                INSERT INTO authors (name, nationality, image) 
+                VALUES (?,?,?)
+                """;
+
+        int rowsAffected =jdbcTemplate.update(
+                sql,
+                author.getName(),
+                author.getImage(),
+                author.getNationality());
+
+        return rowsAffected;
     }
 
     @Override
     public List<Authors> displayAuthors() {
         String sql = """
                 SELECT author_id, name, nationality, image
-                FROM authors WHERE author_id = ?
+                FROM authors 
+                WHERE author_id = ?
                 """;
         RowMapper<Authors> authorsRowMapper = ((rs, rowNum) -> {
             Authors author = new Authors(
