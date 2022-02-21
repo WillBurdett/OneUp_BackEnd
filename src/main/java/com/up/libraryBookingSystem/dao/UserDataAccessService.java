@@ -7,11 +7,12 @@ import java.util.List;
 public class UserDataAccessService implements UserDao{
     @Override
     public int addUser() {
-        return 0;
+        return 1;
     }
 
     @Override
     public List<Users> selectAllUsers() {
+
         return null;
     }
 

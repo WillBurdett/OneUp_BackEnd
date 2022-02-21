@@ -5,7 +5,9 @@ import com.up.libraryBookingSystem.pojo.Authors;
 import java.util.List;
 
 public interface AuthorsDao {
-    int selectAuthors();
+
+    Authors selectAuthorById(Integer authorId);
+
     int addAuthors();
     List<Authors> displayAuthors();
 
