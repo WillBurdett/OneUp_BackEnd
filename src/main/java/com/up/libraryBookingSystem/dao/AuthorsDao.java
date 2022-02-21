@@ -11,7 +11,5 @@ public interface AuthorsDao {
 
     int addAuthors(Authors author);
     List<Authors> displayAuthors();
-
-
-
+    int deleteAuthor(Integer authorId);
 }
