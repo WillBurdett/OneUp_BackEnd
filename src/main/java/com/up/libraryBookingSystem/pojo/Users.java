@@ -7,11 +7,24 @@ public class Users {
     private Integer serialID;
     private String username;
     private String name;
+    private Boolean isManager;
+    private String password;
 
-    public Users(Integer serialID, String username, String name) {
+
+
+//    public Users(Integer serialID, String username, String name, Boolean isManager, String password) {
+//        this.serialID = serialID;
+//        this.username = username;
+//        this.name = name;
+//        this.isManager = isManager;
+//        this.password = password;
+//    }
+
+    public Users(Integer serialID, String username, String name, Boolean isManager) {
         this.serialID = serialID;
         this.username = username;
         this.name = name;
+        this.isManager = isManager;
     }
 
     public Integer getSerialID() {
@@ -38,13 +51,20 @@ public class Users {
         this.name = name;
     }
 
-    @Override
-    public String toString() {
-        return "Users{" +
-                "serialID=" + serialID +
-                ", username='" + username + '\'' +
-                ", name='" + name + '\'' +
-                '}';
+    public Boolean getManager() {
+        return isManager;
+    }
+
+    public void setManager(Boolean manager) {
+        isManager = manager;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
@@ -52,11 +72,22 @@ public class Users {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Users users = (Users) o;
-        return Objects.equals(serialID, users.serialID) && Objects.equals(username, users.username) && Objects.equals(name, users.name);
+        return Objects.equals(serialID, users.serialID) && Objects.equals(username, users.username) && Objects.equals(name, users.name) && Objects.equals(isManager, users.isManager) && Objects.equals(password, users.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(serialID, username, name);
+        return Objects.hash(serialID, username, name, isManager, password);
+    }
+
+    @Override
+    public String toString() {
+        return "Users{" +
+                "serialID=" + serialID +
+                ", username='" + username + '\'' +
+                ", name='" + name + '\'' +
+                ", isManager=" + isManager +
+                ", password='" + password + '\'' +
+                '}';
     }
 }
