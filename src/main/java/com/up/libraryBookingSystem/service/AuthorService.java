@@ -72,7 +72,7 @@ public class AuthorService {
     }
 
     public Authors selectAuthorById(Integer authorId) {
-        return authorsDao.selectAuthorById(authorId);
+        return  authorsDao.selectAuthorById(authorId);
     }
 
     public Authors selectAuthorByName(String authorName) {

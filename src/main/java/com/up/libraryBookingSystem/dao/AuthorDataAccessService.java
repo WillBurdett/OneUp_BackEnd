@@ -21,36 +21,32 @@ public class AuthorDataAccessService implements AuthorsDao {
     @Override
     public Authors selectAuthorById(Integer authorId) {
 
-//        String sql = """
-//                SELECT author_id, name, nationality, image
-//                FROM authors
-//                WHERE author_id = ?
-//                """;
+        String sql = """
+                SELECT author_id, name, nationality, image
+                FROM authors
+                WHERE author_id = ?
+                """;
         for (int i = 0; i < displayAuthors().size(); i++) {
             if (displayAuthors().get(i).getAuthorId().equals(authorId)) {
                 return displayAuthors().get(i);
             }
-
         }
-
         return null;
     }
 
-
     @Override
     public Authors selectAuthorByName(String authorName) {
-
-//        String sql = """
-//                SELECT author_id, name, nationality, image
-//                FROM authors
-//                WHERE author_id = ?
-//                """;
+       // Authors yang = new Authors(5, "Yang Qiu", Nationality.CHINESE, null);
+        String sql = """
+                SELECT author_id, name, nationality, image
+                FROM authors
+                WHERE name = ?
+                """;
         for (int i = 0; i < displayAuthors().size(); i++) {
             if (displayAuthors().get(i).getName().equals(authorName)) {
-                return displayAuthors().get(i);
+               return displayAuthors().get(i);
             }
         }
-
         return null;
     }
 
@@ -77,7 +73,7 @@ public class AuthorDataAccessService implements AuthorsDao {
     public List<Authors> displayAuthors() {
         String sql = """
                 SELECT author_id, name, nationality, image
-                FROM authors 
+                FROM authors
                 """;
         RowMapper<Authors> authorsRowMapper = ((rs, rowNum) -> {
             Authors author = new Authors(
@@ -96,7 +92,7 @@ public class AuthorDataAccessService implements AuthorsDao {
     @Override
     public int deleteAuthor(Integer authorId) {
         String sql = """
-                DELETE * FROM authors
+                DELETE FROM authors
                 WHERE authorId = ?
                 """;
         return jdbcTemplate.update(

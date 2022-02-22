@@ -92,18 +92,20 @@ public class LibraryController {
     }
 
     //Authors
-    @GetMapping(path = "authors")
+    @GetMapping(path = "author")
     public List<Authors> getAuthors() {
         return authorService.displayAuthors();
     }
 
-    @GetMapping(path = "authors/{id}")
-    public Authors getAuthorById(@PathVariable("id") Integer authorId) {
+    @GetMapping(path = "authors/{id}") //localhost:8080/authors/3
+ //   @RequestMapping(value = "/{authorID}", method = RequestMethod.GET)
+    public Authors getAuthorById(@PathVariable (value= "id") Integer authorId) {
         return authorService.selectAuthorById(authorId);
     }
 
-    @GetMapping(path = "authors/{name}")
-    public Authors getAuthorByName(@PathVariable("name") String authorName) {
+   //@GetMapping(params = "author/{name}")
+    @RequestMapping(method = RequestMethod.GET) //localhost:8080/?authorName=Brandon Sanderson
+    public Authors getAuthorByName(@RequestParam(value = "authorName") String authorName) {
         return authorService.selectAuthorByName(authorName);
     }
 

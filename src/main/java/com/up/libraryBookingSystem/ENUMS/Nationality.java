@@ -6,5 +6,7 @@ public enum Nationality {
     JAPANESE,
     RUSSIAN,
     FRENCH,
-    SPANISH
+    SPANISH,
+    SCOTTISH,
+    CHINESE
 }
