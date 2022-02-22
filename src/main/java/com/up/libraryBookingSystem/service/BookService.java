@@ -39,11 +39,9 @@ public class BookService {
         }
     }
 
-    public void updateBook(Books book, Integer bookId) {
+    public void updateBook(Integer bookId, Books book) {
         boolean exists = bookExists(bookId);
-
         int result = booksDao.updateBook(bookId, book);
-
         if (result != 1 && book.isLoaned()) { //if result isn't one then you know that something failed.
             throw new IllegalStateException("Could not update car in database. Input not valid");
         }
@@ -51,6 +49,10 @@ public class BookService {
 
     public List<Books> displayBooks() {
         return booksDao.displayBooks();
+    }
+
+    public Books selectBookById(Integer bookId) {
+        return  booksDao.selectBookById(bookId);
     }
 
     //adding book

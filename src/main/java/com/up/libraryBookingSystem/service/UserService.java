@@ -80,7 +80,7 @@ public class UserService {
         }
     }
 
-    public void updateUser(Users user, Integer userId) {
+    public void updateUser(Integer userId, Users user) {
         boolean exists = userExists(userId);
 
         int result = usersDao.updateUser(userId, user);
@@ -93,6 +93,12 @@ public class UserService {
     public List<Users> displayUsers() {
         return usersDao.selectAllUsers();
     }
+
+    public Users selectUserById(Integer userId) {
+        boolean exists = userExists(userId);
+        return usersDao.selectUserById(userId);
+    }
+
 
 }
 

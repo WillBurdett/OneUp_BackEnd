@@ -16,7 +16,7 @@ public class AuthorService {
         this.authorsDao = authorsDao;
     }
 
-    private boolean authorExists(Integer authorId){
+    private boolean authorExists(Integer authorId) {
         return authorsDao
                 .displayAuthors()
                 .stream()
@@ -24,25 +24,27 @@ public class AuthorService {
 
 //
     }
-    public void addAuthor(Authors author){
+
+    public void addAuthor(Authors author) {
         boolean exists = authorExists(author.getAuthorId());
-        if (!exists && author.getName().isEmpty() && author.getName()==null){
+        if (!exists && author.getName().isEmpty() && author.getName() == null) {
             authorsDao.addAuthors(author);
-        }else{
+        } else {
             throw new IllegalStateException("Author already exists");
         }
 
     }
-    public void deleteAuthor(Integer authorId){
+
+    public void deleteAuthor(Integer authorId) {
         boolean exists = authorExists(authorId);
-        if(!exists){
+        if (!exists) {
             throw new IllegalStateException("Author does not exist");
-        }else{
+        } else {
             authorsDao.deleteAuthor(authorId);
         }
     }
 
-    public void updateAuthor(Authors author, Integer authorId) {
+    public void updateAuthor(Integer authorId, Authors author) {
         boolean exists = authorExists(authorId);
 
         int result = authorsDao.updateAuthor(authorId, author);
@@ -56,13 +58,16 @@ public class AuthorService {
         return authorsDao.displayAuthors();
     }
 
+    public Authors selectAuthorById(Integer authorId) {
+        return authorsDao.selectAuthorById(authorId);
+    }
 
+    public Authors selectAuthorByName(String authorName) {
+        return authorsDao.selectAuthorByName(authorName);
+    }
 
 
 }
-
-
-
 
 
 //adding author
@@ -70,7 +75,6 @@ public class AuthorService {
 
 
 //todo: check fields are not null
-
 
 
 //deleting author
