@@ -9,6 +9,8 @@ CREATE TABLE authors (
     image TEXT
 );
 
+//filler the books for authors
+
 CREATE TABLE books (
     id SERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,

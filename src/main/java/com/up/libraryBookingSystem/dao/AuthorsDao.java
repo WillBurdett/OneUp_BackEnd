@@ -9,6 +9,8 @@ public interface AuthorsDao {
 
     Authors selectAuthorById(Integer authorId);
 
+    Authors selectAuthorByName(String authorName);
+
     int addAuthors(Authors author);
     List<Authors> displayAuthors();
     int deleteAuthor(Integer authorId);

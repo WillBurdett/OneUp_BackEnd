@@ -37,6 +37,28 @@ public class AuthorDataAccessService implements AuthorsDao{
 
 
     @Override
+    public Authors selectAuthorByName(String authorName) {
+
+//        String sql = """
+//                SELECT author_id, name, nationality, image
+//                FROM authors
+//                WHERE author_id = ?
+//                """;
+        for (int i = 0; i < displayAuthors().size() ; i++) {
+            if (displayAuthors().get(i).getName().equals(authorName)){
+                return displayAuthors().get(i);
+            }
+        }
+
+        return null;
+    }
+
+
+
+
+
+
+    @Override
     public int addAuthors(Authors author) {
 
         String sql= """
