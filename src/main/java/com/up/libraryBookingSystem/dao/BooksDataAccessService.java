@@ -21,7 +21,7 @@ public class BooksDataAccessService implements BooksDao {
     @Override
     public Books selectBookById(Integer bookId) {
         List<Books> booksList = displayBooks();
-        for (int i = 0; i < booksList.size() ; i++) {
+        for (int i = 0; i < booksList.size(); i++) {
             if (booksList.get(i).getBookId().equals(bookId)){
                 return booksList.get(i);
             }
@@ -52,7 +52,7 @@ public class BooksDataAccessService implements BooksDao {
     }
 
     @Override
-    public int addBook(Books book) {
+    public Integer addBook(Books book) {
 
         String sql= """
                 INSERT INTO books (title, genre, author_id, loaned, ISBN) 
@@ -73,11 +73,12 @@ public class BooksDataAccessService implements BooksDao {
     @Override
     public List<Books> displayBooks() {
         String sql = """
-                SELECT title, genre, author_id, loaned, ISBN
+                SELECT bookId, title, genre, author_id, loaned, ISBN
                 FROM books 
                 """;
         RowMapper<Books> booksRowMapper = ((rs, rowNum) -> {
             Books book = new Books(
+                    rs.getInt("bookId"),
                     rs.getString("title"),
                     GENRES.valueOf(rs.getString("genre").toUpperCase(Locale.ROOT)),
                     rs.getInt("author_id"),
@@ -86,15 +87,15 @@ public class BooksDataAccessService implements BooksDao {
             );
             return book;
         });
-        List<Books> authors = jdbcTemplate.query(sql, booksRowMapper);
-        return authors;
+        List<Books> books = jdbcTemplate.query(sql, booksRowMapper);
+        return books;
     }
 
 
     @Override
-    public int deleteBook(Integer bookId) {
+    public Integer deleteBook(Integer bookId) {
         String sql = """
-                DELETE * FROM books
+                DELETE FROM books
                 WHERE bookId = ?
                 """;
         return jdbcTemplate.update(
@@ -103,7 +104,7 @@ public class BooksDataAccessService implements BooksDao {
 
     }
     @Override
-    public int updateBook(Integer bookId, Books bookUpdate){
+    public Integer updateBook(Integer bookId, Books bookUpdate){
         String sql = """
                 UPDATE books 
                 SET (title, genre, author_id, loaned, ISBN) = (?, ?, ?, ?, ?)    

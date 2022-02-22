@@ -73,16 +73,17 @@ public class LibraryController {
         return bookService.selectBookById(bookId);
     }
 
-    @PostMapping(path = "books")
+    //use localhost:8080/books/?isManager=true in postman
+    @PostMapping(path = "books", params = "isManager")
     public void addBook(@RequestBody Books book, @RequestParam boolean isManager) {
-        if(isManager == true){
+        if(isManager){
         bookService.addBook(book);}
         else { throw new IllegalStateException("Access denied.");}
     }
 
     @DeleteMapping(path = "books/{id}")
-    public void deleteBookById(@PathVariable("id") Integer bookId, @RequestBody Books book) {
-        bookService.deleteBook(bookId, book);
+    public void deleteBookById(@PathVariable("id") Integer bookId) {
+        bookService.deleteBook(bookId);
     }
 
     @PutMapping(path = "books/{id}")

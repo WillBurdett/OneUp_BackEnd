@@ -1,7 +1,6 @@
 package com.up.libraryBookingSystem.service;
 
 import com.up.libraryBookingSystem.dao.BooksDao;
-import com.up.libraryBookingSystem.pojo.Authors;
 import com.up.libraryBookingSystem.pojo.Books;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -26,17 +25,17 @@ public class BookService {
 
     public void addBook(Books book) {
         boolean exists = bookExists(book.getBookId());
-        if (!exists && (book.getTitle().isEmpty() || book.getTitle() == null)) {
+        if (!exists || (book.getTitle().isEmpty() || book.getTitle() == null)) {
             booksDao.addBook(book);
         } else {
-            throw new IllegalStateException("Author already exists");
+            throw new IllegalStateException("Book already exists");
         }
     }
 
-    public void deleteBook(Integer bookId, Books book) {
+    public void deleteBook(Integer bookId) {
         boolean exists = bookExists(bookId);
-        if (!exists && book.isLoaned()) {
-            throw new IllegalStateException("Author does not exist");
+        if (!exists /*&& book.isLoaned()*/) {
+            throw new IllegalStateException("Book does not exist");
         } else {
             booksDao.deleteBook(bookId);
         }

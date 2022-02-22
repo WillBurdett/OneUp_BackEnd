@@ -59,15 +59,15 @@ public class AuthorDataAccessService implements AuthorsDao {
     public int addAuthors(Authors author) {
 
         String sql = """
-                INSERT INTO authors (name, nationality, image) 
+                INSERT INTO authors (name, nationality, image)
                 VALUES (?,?,?)
                 """;
 
         int rowsAffected = jdbcTemplate.update(
                 sql,
                 author.getName(),
-                author.getImage(),
-                author.getNationality()
+                author.getNationality().name(),
+                author.getImage()
         );
 
         return rowsAffected;

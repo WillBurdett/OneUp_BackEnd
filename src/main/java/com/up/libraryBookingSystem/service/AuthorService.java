@@ -38,7 +38,7 @@ public class AuthorService {
 
     public void addAuthor(Authors author) {
         boolean exists = authorExists(author.getAuthorId());
-        if (!exists && (author.getName().isEmpty() || author.getName() == null)) {
+        if (!exists || (author.getName().isEmpty() || author.getName() == null)) {
             authorsDao.addAuthors(author);
         } else {
             throw new IllegalStateException("Author already exists");
