@@ -12,6 +12,10 @@ public interface AuthorsDao {
     Authors selectAuthorByName(String authorName);
 
     int addAuthors(Authors author);
+
     List<Authors> displayAuthors();
+
     int deleteAuthor(Integer authorId);
+
+    int updateAuthor(Integer authorId, Authors authorUpdate);
 }

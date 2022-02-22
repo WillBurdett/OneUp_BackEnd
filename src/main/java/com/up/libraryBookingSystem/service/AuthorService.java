@@ -32,8 +32,24 @@ public class AuthorService {
             throw new IllegalStateException("Author already exists");
         }
 
+    }
+    public void deleteAuthor(Integer authorId){
+        boolean exists = authorExists(authorId);
+        if(!exists){
+            throw new IllegalStateException("Author does not exist");
+        }else{
+            authorsDao.deleteAuthor(authorId);
+        }
+    }
+    public void updateAuthor(Authors author, Integer authorId){
+        boolean exists = authorExists(authorId)
 
+        int result = authorsDao.updateAuthor(authorId, author);
 
+        if (result !=1){ //if result isn't one then you know that something failed.
+            throw new IllegalStateException("Could not update car in database. Input not valid");
+        }
+        
     }
 
 

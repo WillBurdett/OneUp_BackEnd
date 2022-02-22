@@ -106,6 +106,7 @@ public class AuthorDataAccessService implements AuthorsDao{
                 authorId);
 
     }
+    @Override
     public int updateAuthor(Integer authorId, Authors authorUpdate){
         String sql = """
                 UPDATE authors 
