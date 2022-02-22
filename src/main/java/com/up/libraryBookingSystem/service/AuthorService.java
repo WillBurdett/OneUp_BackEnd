@@ -42,14 +42,16 @@ public class AuthorService {
         }
     }
     public void updateAuthor(Authors author, Integer authorId){
-        boolean exists = authorExists(authorId)
+        boolean exists = authorExists(authorId);
 
         int result = authorsDao.updateAuthor(authorId, author);
 
         if (result !=1){ //if result isn't one then you know that something failed.
             throw new IllegalStateException("Could not update car in database. Input not valid");
         }
-        
+    }
+    public List<Authors> displayAuthors() {
+        return authorsDao.displayAuthors();
     }
 
 
