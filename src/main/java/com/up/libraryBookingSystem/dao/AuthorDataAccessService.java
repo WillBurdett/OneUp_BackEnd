@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Locale;
 
 @Repository("authors")
 public class AuthorDataAccessService implements AuthorsDao {
@@ -66,7 +67,8 @@ public class AuthorDataAccessService implements AuthorsDao {
                 sql,
                 author.getName(),
                 author.getImage(),
-                author.getNationality());
+                author.getNationality()
+        );
 
         return rowsAffected;
     }
@@ -76,13 +78,12 @@ public class AuthorDataAccessService implements AuthorsDao {
         String sql = """
                 SELECT author_id, name, nationality, image
                 FROM authors 
-                WHERE author_id = ?
                 """;
         RowMapper<Authors> authorsRowMapper = ((rs, rowNum) -> {
             Authors author = new Authors(
                     rs.getInt("author_id"),
                     rs.getString("name"),
-                    Nationality.valueOf(rs.getString("nationality")),
+                    Nationality.valueOf(rs.getString("nationality").toUpperCase(Locale.ROOT)),
                     rs.getString("image")
             );
             return author;

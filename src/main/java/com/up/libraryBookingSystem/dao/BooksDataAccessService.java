@@ -75,12 +75,11 @@ public class BooksDataAccessService implements BooksDao {
         String sql = """
                 SELECT title, genre, author_id, loaned, ISBN
                 FROM books 
-                WHERE book_id = ?
                 """;
         RowMapper<Books> booksRowMapper = ((rs, rowNum) -> {
             Books book = new Books(
                     rs.getString("title"),
-                    GENRES.valueOf(rs.getString("genre")),
+                    GENRES.valueOf(rs.getString("genre").toUpperCase(Locale.ROOT)),
                     rs.getInt("author_id"),
                     rs.getBoolean("loaned"),
                     rs.getInt("ISBN")

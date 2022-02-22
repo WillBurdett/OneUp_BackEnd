@@ -5,7 +5,7 @@ public enum GENRES {
     ROMANCE,
     YOUNG_ADULT,
     LITERARY_FICTION,
-    CLASSICS,
+    CLASSIC,
     NON_FICTION,
     EDUCATION
 }

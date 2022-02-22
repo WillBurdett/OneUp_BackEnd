@@ -9,7 +9,14 @@ CREATE TABLE authors (
     image TEXT
 );
 
-//filler the books for authors
+
+CREATE TABLE users (
+    user_id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    username VARCHAR (255) NOT NULL,
+    isManager BOOLEAN NOT NULL,
+    password VARCHAR(255) NOT NULL
+);
 
 CREATE TABLE books (
     id SERIAL PRIMARY KEY,
@@ -21,13 +28,6 @@ CREATE TABLE books (
     ISBN INT NOT NULL
 );
 
-CREATE TABLE users (
-    user_id SERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    username VARCHAR (255) NOT NULL,
-    isManager BOOLEAN NOT NULL,
-    password VARCHAR(255) NOT NULL
-);
 
 INSERT INTO authors (name, nationality) VALUES ('Jane Austen', 'English');
 

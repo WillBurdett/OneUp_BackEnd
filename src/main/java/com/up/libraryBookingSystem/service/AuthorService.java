@@ -13,18 +13,18 @@ import java.util.List;
 public class AuthorService {
 
     private AuthorsDao authorsDao;
-    private BooksDao booksDao;
+//    private BooksDao booksDao;
 
-    public AuthorService() {
-    }
+//    public AuthorService() {
+//    }
 
     public AuthorService(@Qualifier("authors") AuthorsDao authorsDao) {
         this.authorsDao = authorsDao;
     }
 
-    public AuthorService(@Qualifier("books") BooksDao booksDao) {
-        this.booksDao = booksDao;
-    }
+//    public AuthorService(@Qualifier("books") BooksDao booksDao) {
+//        this.booksDao = booksDao;
+//    }
 
 
     private boolean authorExists(Integer authorId) {
@@ -50,8 +50,8 @@ public class AuthorService {
         boolean exists = authorExists(authorId);
         if (!exists) {
             throw new IllegalStateException("Author does not exist");
-        } else if (booksDao.selectBookByAuthorId(authorId) != null) {
-            throw new IllegalStateException("Author has book in library");
+//        } else if (booksDao.selectBookByAuthorId(authorId) != null) {
+//            throw new IllegalStateException("Author has book in library");
         }else{
             authorsDao.deleteAuthor(authorId);
         }//else if author has books throw exception
