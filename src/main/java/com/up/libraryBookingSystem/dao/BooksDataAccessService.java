@@ -41,12 +41,21 @@ public class BooksDataAccessService implements BooksDao {
         return null;
     }
     //todo: write method for finding book by author id
+    public Books selectBookByAuthorId(Integer AuthorId){
+        List<Books> booksList = displayBooks();
+        for (int i = 0; i < booksList.size() ; i++) {
+            if (booksList.get(i).getAuthorId().equals(AuthorId)){
+                return booksList.get(i);
+            }
+        }
+        return null;
+    }
 
     @Override
     public int addBook(Books book) {
 
         String sql= """
-                INSERT INTO books (title, genre, author, loaned, ISBN) 
+                INSERT INTO books (title, genre, author_id, loaned, ISBN) 
                 VALUES (?,?,?,?,?)
                 """;
 
@@ -54,7 +63,7 @@ public class BooksDataAccessService implements BooksDao {
                 sql,
                 book.getTitle(),
                 book.getGenre().name(),
-                book.getAuthor(),
+                book.getAuthorId(),
                 book.isLoaned(),
                 book.getISBN()
         );
@@ -64,7 +73,7 @@ public class BooksDataAccessService implements BooksDao {
     @Override
     public List<Books> displayBooks() {
         String sql = """
-                SELECT title, genre, author, loaned, ISBN
+                SELECT title, genre, author_id, loaned, ISBN
                 FROM books 
                 WHERE book_id = ?
                 """;
@@ -72,7 +81,7 @@ public class BooksDataAccessService implements BooksDao {
             Books book = new Books(
                     rs.getString("title"),
                     GENRES.valueOf(rs.getString("genre")),
-                    rs.getString("author"),
+                    rs.getInt("author_id"),
                     rs.getBoolean("loaned"),
                     rs.getInt("ISBN")
             );
@@ -98,14 +107,14 @@ public class BooksDataAccessService implements BooksDao {
     public int updateBook(Integer bookId, Books bookUpdate){
         String sql = """
                 UPDATE books 
-                SET (title, genre, author, loaned, ISBN) = (?, ?, ?, ?, ?)    
+                SET (title, genre, author_id, loaned, ISBN) = (?, ?, ?, ?, ?)    
                 WHERE bookId = ?            
                 """;
         return jdbcTemplate.update(
                 sql,
                 bookUpdate.getTitle(),
                 bookUpdate.getGenre(),
-                bookUpdate.getAuthor(),
+                bookUpdate.getAuthorId(),
                 bookUpdate.isLoaned(),
                 bookUpdate.getISBN()
         );

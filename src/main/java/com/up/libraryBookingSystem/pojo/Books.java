@@ -9,16 +9,16 @@ public class Books {
     private Integer bookId;
     private String title;
     private GENRES genre;
-    private String author;
+    private Integer authorId;
     private Integer userID;
     private boolean loaned;
     private int ISBN;
 
-    public Books(String title, GENRES genre, String author, boolean loaned, int ISBN) {
+    public Books(String title, GENRES genre, Integer authorId, boolean loaned, int ISBN) {
         this.bookId = bookId;
         this.title = title;
         this.genre = genre;
-        this.author = author;
+        this.authorId = authorId;
         this.userID = userID;
         this.loaned = loaned;
         this.ISBN = ISBN;
@@ -48,12 +48,12 @@ public class Books {
         this.genre = genre;
     }
 
-    public String getAuthor() {
-        return author;
+    public Integer getAuthorId() {
+        return authorId;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setAuthorId(Integer author) {
+        this.authorId = authorId;
     }
 
     public Integer getUserID() {
@@ -85,21 +85,21 @@ public class Books {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Books books = (Books) o;
-        return loaned == books.loaned && ISBN == books.ISBN && Objects.equals(bookId, books.bookId) && Objects.equals(title, books.title) && genre == books.genre && Objects.equals(author, books.author) && Objects.equals(userID, books.userID);
+        return loaned == books.loaned && ISBN == books.ISBN && Objects.equals(bookId, books.bookId) && Objects.equals(title, books.title) && genre == books.genre && Objects.equals(authorId, books.authorId) && Objects.equals(userID, books.userID);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(bookId, title, genre, author, userID, loaned, ISBN);
+        return Objects.hash(bookId, title, genre, authorId, userID, loaned, ISBN);
     }
 
     @Override
     public String toString() {
         return "Books{" +
-                "serialID=" + bookId +
+                "bookId=" + bookId +
                 ", title='" + title + '\'' +
                 ", genre=" + genre +
-                ", author='" + author + '\'' +
+                ", authorId=" + authorId +
                 ", userID=" + userID +
                 ", loaned=" + loaned +
                 ", ISBN=" + ISBN +

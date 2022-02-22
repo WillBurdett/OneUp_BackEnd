@@ -2,6 +2,7 @@ package com.up.libraryBookingSystem.service;
 
 
 import com.up.libraryBookingSystem.dao.AuthorsDao;
+import com.up.libraryBookingSystem.dao.BooksDao;
 import com.up.libraryBookingSystem.pojo.Authors;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -12,10 +13,16 @@ import java.util.List;
 public class AuthorService {
 
     private AuthorsDao authorsDao;
+    private BooksDao booksDao;
 
     public AuthorService(@Qualifier("authors") AuthorsDao authorsDao) {
         this.authorsDao = authorsDao;
     }
+
+    public AuthorService(BooksDao booksDao) {
+        this.booksDao = booksDao;
+    }
+
 
     private boolean authorExists(Integer authorId) {
         return authorsDao
@@ -40,7 +47,9 @@ public class AuthorService {
         boolean exists = authorExists(authorId);
         if (!exists) {
             throw new IllegalStateException("Author does not exist");
-        } else {
+        } else if (booksDao.selectBookByAuthorId(authorId) != null) {
+            throw new IllegalStateException("Author has book in library");
+        }else{
             authorsDao.deleteAuthor(authorId);
         }//else if author has books throw exception
     }

@@ -18,4 +18,7 @@ public interface BooksDao {
     List<Books> displayBooks();
 
     boolean isLoaned(Books book);
+
+    Books selectBookByAuthorId(Integer AuthorId);
+
 }
