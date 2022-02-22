@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository("Postgres")
+@Repository("authors")
 public class AuthorDataAccessService implements AuthorsDao {
 
     private JdbcTemplate jdbcTemplate;

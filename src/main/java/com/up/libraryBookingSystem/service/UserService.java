@@ -4,14 +4,17 @@ package com.up.libraryBookingSystem.service;
 import com.up.libraryBookingSystem.dao.UserDao;
 import com.up.libraryBookingSystem.pojo.Users;
 import org.apache.catalina.User;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class UserService {
 
     private UserDao usersDao;
 
-    public UserService(UserDao usersDao) {
+    public UserService(@Qualifier("users") UserDao usersDao) {
         this.usersDao = usersDao;
     }
 

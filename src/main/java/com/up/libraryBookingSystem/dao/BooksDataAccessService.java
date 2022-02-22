@@ -5,10 +5,11 @@ import com.up.libraryBookingSystem.ENUMS.GENRES;
 import com.up.libraryBookingSystem.pojo.Books;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Locale;
-
+@Repository("books")
 public class BooksDataAccessService implements BooksDao {
 
     private JdbcTemplate jdbcTemplate;
@@ -19,27 +20,27 @@ public class BooksDataAccessService implements BooksDao {
 
     @Override
     public Books selectBookById(Integer bookId) {
-
-        for (int i = 0; i < displayBooks().size() ; i++) {
-            if (displayBooks().get(i).getBookId().equals(bookId)){
-                return displayBooks().get(i);
+        List<Books> booksList = displayBooks();
+        for (int i = 0; i < booksList.size() ; i++) {
+            if (booksList.get(i).getBookId().equals(bookId)){
+                return booksList.get(i);
             }
         }
         return null;
     }
     @Override
     public Books selectBookByTitle(String bookTitle) {
-
-        for (int i = 0; i < displayBooks().size() ; i++) {
-            if (displayBooks().get(i).getTitle().equals(bookTitle
-//                    .toLowerCase(Locale.ROOT)
-//                    .toUpperCase(Locale.ROOT)
-            )){
-                return displayBooks().get(i);
+        List<Books> booksList = displayBooks();
+        for (int i = 0; i < booksList.size() ; i++) {
+            if (booksList.get(i).getTitle()
+                    .toLowerCase(Locale.ROOT)
+                    .equals(bookTitle.toLowerCase(Locale.ROOT))){
+                return booksList.get(i);
             }
         }
         return null;
     }
+    //todo: write method for finding book by author id
 
     @Override
     public int addBook(Books book) {

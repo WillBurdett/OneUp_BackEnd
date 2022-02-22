@@ -19,17 +19,22 @@ public class LibraryController {
     private AuthorService authorService;
     private BookService bookService;
 
-    public LibraryController(UserService userService) {
+    public LibraryController(UserService userService, AuthorService authorService, BookService bookService) {
         this.userService = userService;
-    }
-
-    public LibraryController(AuthorService authorService) {
         this.authorService = authorService;
-    }
-
-    public LibraryController(BookService bookService) {
         this.bookService = bookService;
     }
+//    public LibraryController(UserService userService) {
+//        this.userService = userService;
+//    }
+//
+//    public LibraryController(AuthorService authorService) {
+//        this.authorService = authorService;
+//    }
+//
+//    public LibraryController(BookService bookService) {
+//        this.bookService = bookService;
+//    }
 
     //Users
     @GetMapping(path = "users")
@@ -69,8 +74,10 @@ public class LibraryController {
     }
 
     @PostMapping(path = "books")
-    public void addBook(@RequestBody Books book) {
-        bookService.addBook(book);
+    public void addBook(@RequestBody Books book, @RequestParam boolean isManager) {
+        if(isManager == true){
+        bookService.addBook(book);}
+        else { throw new IllegalStateException("Access denied.");}
     }
 
     @DeleteMapping(path = "books/{id}")

@@ -3,6 +3,7 @@ package com.up.libraryBookingSystem.service;
 
 import com.up.libraryBookingSystem.dao.AuthorsDao;
 import com.up.libraryBookingSystem.pojo.Authors;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,7 +13,7 @@ public class AuthorService {
 
     private AuthorsDao authorsDao;
 
-    public AuthorService(AuthorsDao authorsDao) {
+    public AuthorService(@Qualifier("authors") AuthorsDao authorsDao) {
         this.authorsDao = authorsDao;
     }
 
@@ -27,7 +28,7 @@ public class AuthorService {
 
     public void addAuthor(Authors author) {
         boolean exists = authorExists(author.getAuthorId());
-        if (!exists && author.getName().isEmpty() && author.getName() == null) {
+        if (!exists && (author.getName().isEmpty() || author.getName() == null)) {
             authorsDao.addAuthors(author);
         } else {
             throw new IllegalStateException("Author already exists");
@@ -41,7 +42,7 @@ public class AuthorService {
             throw new IllegalStateException("Author does not exist");
         } else {
             authorsDao.deleteAuthor(authorId);
-        }
+        }//else if author has books throw exception
     }
 
     public void updateAuthor(Integer authorId, Authors author) {
@@ -50,7 +51,7 @@ public class AuthorService {
         int result = authorsDao.updateAuthor(authorId, author);
 
         if (result != 1) { //if result isn't one then you know that something failed.
-            throw new IllegalStateException("Could not update car in database. Input not valid");
+            throw new IllegalStateException("Could not update author in database. Input not valid");
         }
     }
 

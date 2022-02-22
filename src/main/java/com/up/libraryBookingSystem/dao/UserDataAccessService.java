@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository("postgres")
+@Repository("users")
 public class UserDataAccessService implements UserDao {
 
     private JdbcTemplate jdbcTemplate;
@@ -33,9 +33,8 @@ public class UserDataAccessService implements UserDao {
     @Override
     public List<Users> selectAllUsers() {
         String sql = """
-                SELECT name, username, isManager,
-                FROM users 
-                WHERE user_id = ?
+                SELECT name, username, isManager, user_id
+                FROM users
                 """; //not including password as we don't want password to be easily accessible for security reasons
         RowMapper<Users> usersRowMapper = ((rs, rowNum) -> {
             Users user = new Users(
