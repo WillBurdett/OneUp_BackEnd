@@ -15,11 +15,14 @@ public class AuthorService {
     private AuthorsDao authorsDao;
     private BooksDao booksDao;
 
+    public AuthorService() {
+    }
+
     public AuthorService(@Qualifier("authors") AuthorsDao authorsDao) {
         this.authorsDao = authorsDao;
     }
 
-    public AuthorService(BooksDao booksDao) {
+    public AuthorService(@Qualifier("books") BooksDao booksDao) {
         this.booksDao = booksDao;
     }
 
