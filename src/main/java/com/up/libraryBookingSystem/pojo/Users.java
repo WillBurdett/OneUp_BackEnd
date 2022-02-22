@@ -11,7 +11,6 @@ public class Users {
     private String password;
 
 
-
 //    public Users(Integer serialID, String username, String name, Boolean isManager, String password) {
 //        this.serialID = serialID;
 //        this.username = username;

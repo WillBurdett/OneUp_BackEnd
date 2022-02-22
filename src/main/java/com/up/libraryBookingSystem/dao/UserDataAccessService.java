@@ -8,11 +8,11 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository("postgres")
-public class UserDataAccessService implements UserDao{
+public class UserDataAccessService implements UserDao {
 
     private JdbcTemplate jdbcTemplate;
 
-    public UserDataAccessService(JdbcTemplate jdbcTemplate){
+    public UserDataAccessService(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
@@ -69,8 +69,8 @@ public class UserDataAccessService implements UserDao{
                 FROM users
                 WHERE user_id = ?
                 """;
-        for (int i = 0; i < selectAllUsers().size() ; i++) {
-            if (selectAllUsers().get(i).getSerialID().equals(userId)){
+        for (int i = 0; i < selectAllUsers().size(); i++) {
+            if (selectAllUsers().get(i).getSerialID().equals(userId)) {
                 return selectAllUsers().get(i);
             }
         }
@@ -78,7 +78,7 @@ public class UserDataAccessService implements UserDao{
     }
 
     @Override
-    public int updateUser(Integer userId, Users userUpdate){
+    public int updateUser(Integer userId, Users userUpdate) {
         String sql = """
                 UPDATE users 
                 SET (name, username, isManager, password) = (?, ?, ?, ?)    

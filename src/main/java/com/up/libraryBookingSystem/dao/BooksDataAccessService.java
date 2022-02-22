@@ -109,5 +109,10 @@ public class BooksDataAccessService implements BooksDao {
                 bookUpdate.getISBN()
         );
     }
+    @Override
+    public boolean isLoaned(Books book){
+        return book.isLoaned();
+    }
+
 }
 //test for branch 

@@ -9,11 +9,11 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository("Postgres")
-public class AuthorDataAccessService implements AuthorsDao{
+public class AuthorDataAccessService implements AuthorsDao {
 
     private JdbcTemplate jdbcTemplate;
 
-    public AuthorDataAccessService(JdbcTemplate jdbcTemplate){
+    public AuthorDataAccessService(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
@@ -25,8 +25,8 @@ public class AuthorDataAccessService implements AuthorsDao{
 //                FROM authors
 //                WHERE author_id = ?
 //                """;
-        for (int i = 0; i < displayAuthors().size() ; i++) {
-            if (displayAuthors().get(i).getAuthorId().equals(authorId)){
+        for (int i = 0; i < displayAuthors().size(); i++) {
+            if (displayAuthors().get(i).getAuthorId().equals(authorId)) {
                 return displayAuthors().get(i);
             }
 
@@ -44,8 +44,8 @@ public class AuthorDataAccessService implements AuthorsDao{
 //                FROM authors
 //                WHERE author_id = ?
 //                """;
-        for (int i = 0; i < displayAuthors().size() ; i++) {
-            if (displayAuthors().get(i).getName().equals(authorName)){
+        for (int i = 0; i < displayAuthors().size(); i++) {
+            if (displayAuthors().get(i).getName().equals(authorName)) {
                 return displayAuthors().get(i);
             }
         }
@@ -54,19 +54,15 @@ public class AuthorDataAccessService implements AuthorsDao{
     }
 
 
-
-
-
-
     @Override
     public int addAuthors(Authors author) {
 
-        String sql= """
+        String sql = """
                 INSERT INTO authors (name, nationality, image) 
                 VALUES (?,?,?)
                 """;
 
-        int rowsAffected =jdbcTemplate.update(
+        int rowsAffected = jdbcTemplate.update(
                 sql,
                 author.getName(),
                 author.getImage(),
@@ -95,6 +91,7 @@ public class AuthorDataAccessService implements AuthorsDao{
         List<Authors> authors = jdbcTemplate.query(sql, authorsRowMapper);
         return authors;
     }
+
     @Override
     public int deleteAuthor(Integer authorId) {
         String sql = """
@@ -106,8 +103,9 @@ public class AuthorDataAccessService implements AuthorsDao{
                 authorId);
 
     }
+
     @Override
-    public int updateAuthor(Integer authorId, Authors authorUpdate){
+    public int updateAuthor(Integer authorId, Authors authorUpdate) {
         String sql = """
                 UPDATE authors 
                 SET (name, nationality, image) = (?, ?, ?)    
@@ -120,8 +118,6 @@ public class AuthorDataAccessService implements AuthorsDao{
                 authorUpdate.getImage()
         );
     }
-
-
 
 
 }

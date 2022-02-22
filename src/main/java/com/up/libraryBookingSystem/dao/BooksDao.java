@@ -17,4 +17,5 @@ public interface BooksDao {
 
     List<Books> displayBooks();
 
+    boolean isLoaned(Books book);
 }
