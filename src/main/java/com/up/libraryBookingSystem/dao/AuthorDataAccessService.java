@@ -105,13 +105,12 @@ public class AuthorDataAccessService implements AuthorsDao {
     public int updateAuthor(Integer authorId, Authors authorUpdate) {
         String sql = """
                 UPDATE authors 
-                SET (name, nationality, image) = (?, ?, ?)    
-                WHERE authorId = ?            
+                SET (name, nationality, image) = (?, ?, ?)               
                 """;
         return jdbcTemplate.update(
                 sql,
                 authorUpdate.getName(),
-                authorUpdate.getNationality(),
+                authorUpdate.getNationality().name(),
                 authorUpdate.getImage()
         );
     }

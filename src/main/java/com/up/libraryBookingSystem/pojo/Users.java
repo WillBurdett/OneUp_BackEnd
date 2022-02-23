@@ -19,10 +19,10 @@ public class Users {
 //        this.password = password;
 //    }
 
-    public Users(Integer serialID, String username, String name, Boolean isManager) {
+    public Users(Integer serialID, String name, String username, Boolean isManager) {
         this.serialID = serialID;
-        this.username = username;
         this.name = name;
+        this.username = username;
         this.isManager = isManager;
     }
 
