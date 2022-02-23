@@ -139,7 +139,7 @@ public class LibraryController {
         authorService.deleteAuthor(authorId);
     }
 
-    @PutMapping(path = "author/{id}")
+    @PutMapping(path = "authors/{id}")
     public void updateAuthor(@PathVariable("id") Integer authorId, @RequestBody Authors updatedAuthor) {
         authorService.updateAuthor(authorId, updatedAuthor);
     }

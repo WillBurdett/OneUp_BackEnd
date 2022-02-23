@@ -32,12 +32,12 @@ class BookServiceTest {
     @Test
     void itCanDeleteBookIfItExists() {
         //Given
-        Books book = new Books(2, "Sara", GENRES.CLASSIC, 2, true, 123);
+        Books book = new Books(2, "Sara", GENRES.CLASSIC, 2, 1, true, 1245);
         Mockito.when(booksDao.displayBooks()).thenReturn(List.of(
-                new Books(2, "Sara", GENRES.CLASSIC, 2, true, 123)
+                new Books(2, "Sara", GENRES.CLASSIC, 2, 1, true, 1245)
         ));
-        Mockito.when(booksDao.deleteBook(book.getBookId()))
-                .thenReturn(1);
+//        Mockito.when(booksDao.deleteBook(book.getBookId()))
+//                .thenReturn(1);
         // When
         underTest.deleteBook(book.getBookId());
 

@@ -69,7 +69,7 @@ public class AuthorDataAccessService implements AuthorsDao {
                 sql,
                 author.getName(),
                 author.getImage(),
-                author.getNationality()
+                author.getNationality().name()
         );
 
         return rowsAffected;
@@ -98,8 +98,8 @@ public class AuthorDataAccessService implements AuthorsDao {
     @Override
     public int deleteAuthor(Integer authorId) {
         String sql = """
-                DELETE * FROM authors
-                WHERE authorId = ?
+                DELETE FROM authors
+                WHERE author_id = ?
                 """;
         return jdbcTemplate.update(
                 sql,

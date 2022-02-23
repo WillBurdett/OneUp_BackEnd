@@ -100,12 +100,12 @@ public class BooksDataAccessService implements BooksDao {
 
 
     @Override
-    public void deleteBook(Integer bookId) {
+    public Integer deleteBook(Integer bookId) {
         String sql = """
                 DELETE FROM books
                 WHERE bookId = ?
                 """;
-        jdbcTemplate.update(
+        return jdbcTemplate.update(
                 sql,
                 bookId);
 
