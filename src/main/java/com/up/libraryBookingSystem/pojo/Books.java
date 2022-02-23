@@ -14,7 +14,7 @@ public class Books {
     private boolean loaned;
     private int ISBN;
 
-    public Books(Integer bookId, String title, GENRES genre, Integer authorId, boolean loaned, int ISBN) {
+    public Books(Integer bookId, String title, GENRES genre, Integer authorId, Integer userID, boolean loaned, int ISBN) {
         this.bookId = bookId;
         this.title = title;
         this.genre = genre;
