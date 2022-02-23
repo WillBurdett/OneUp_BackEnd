@@ -104,6 +104,13 @@ public class LibraryController {
         bookService.updateBook(bookId, updatedBook);
     }
 
+    @RequestMapping(value= "/assign/{bookId}/user/{userId}", method = RequestMethod.PUT)
+   // @PutMapping(path = "books/id}")
+    public void assignUserToBook(@PathVariable(value ="bookId") Integer bookID,
+                                 @PathVariable(value ="userId") Integer userID){
+        bookService.assignUserToBook(bookID, userID);
+    }
+
     //Authors
     @GetMapping(path = "authors")
     public List<Authors> getAuthors() {

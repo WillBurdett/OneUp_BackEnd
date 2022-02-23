@@ -2,7 +2,6 @@ package com.up.libraryBookingSystem.service;
 
 import com.up.libraryBookingSystem.ENUMS.GENRES;
 import com.up.libraryBookingSystem.dao.BooksDao;
-import com.up.libraryBookingSystem.pojo.Authors;
 import com.up.libraryBookingSystem.pojo.Books;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -63,6 +62,11 @@ public class BookService {
 
     public List<Books> displayBooksByGenre(GENRES genre) {
         return booksDao.displayBooksByGenre(genre);
+    }
+
+
+    public void assignUserToBook(Integer bookId, Integer userID){
+        booksDao.assignUserToBook(bookId, userID);
     }
     //adding book
     //todo: check if book already exists

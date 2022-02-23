@@ -7,7 +7,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 @Repository("books")
@@ -80,7 +79,7 @@ public class BooksDataAccessService implements BooksDao {
     @Override
     public List<Books> displayBooks() {
         String sql = """
-                SELECT bookId, title, genre, author_id, loaned, ISBN
+                SELECT bookId, title, genre, user_id, author_id, loaned, ISBN
                 FROM books 
                 """;
         RowMapper<Books> booksRowMapper = ((rs, rowNum) -> {
@@ -89,6 +88,7 @@ public class BooksDataAccessService implements BooksDao {
                     rs.getString("title"),
                     GENRES.valueOf(rs.getString("genre").toUpperCase(Locale.ROOT)),
                     rs.getInt("author_id"),
+                    rs.getInt("user_id"),
                     rs.getBoolean("loaned"),
                     rs.getInt("ISBN")
             );
@@ -100,12 +100,12 @@ public class BooksDataAccessService implements BooksDao {
 
 
     @Override
-    public Integer deleteBook(Integer bookId) {
+    public void deleteBook(Integer bookId) {
         String sql = """
                 DELETE FROM books
                 WHERE bookId = ?
                 """;
-        return jdbcTemplate.update(
+        jdbcTemplate.update(
                 sql,
                 bookId);
 
@@ -113,7 +113,7 @@ public class BooksDataAccessService implements BooksDao {
     @Override
     public Integer updateBook(Integer bookId, Books bookUpdate){
         String sql = """
-                UPDATE books 
+                UPDATE books
                 SET (title, genre, author_id, loaned, ISBN) = (?, ?, ?, ?, ?)              
                 """;
         return jdbcTemplate.update(
@@ -125,6 +125,7 @@ public class BooksDataAccessService implements BooksDao {
                 bookUpdate.getISBN()
         );
     }
+
     @Override
     public boolean isLoaned(Books book){
         return book.isLoaned();
@@ -134,7 +135,7 @@ public class BooksDataAccessService implements BooksDao {
     public List<Books> displayBooksByGenre(GENRES genre) {
         //  List<Books> booksList = displayBooks();
         String sql = """
-                SELECT bookId, title, genre, author_id, loaned, ISBN
+                SELECT bookId, title, genre, author_id, user_id, loaned, ISBN
                 FROM books
                 WHERE genre = ?
                 """;
@@ -144,6 +145,7 @@ public class BooksDataAccessService implements BooksDao {
                     rs.getString("title"),
                     GENRES.valueOf(rs.getString("genre").toUpperCase(Locale.ROOT)),
                     rs.getInt("author_id"),
+                    rs.getInt("user_id"),
                     rs.getBoolean("loaned"),
                     rs.getInt("ISBN")
             );
@@ -153,5 +155,16 @@ public class BooksDataAccessService implements BooksDao {
         return books;
     }
 
-}
-//test for branch 
+    @Override
+    public Integer assignUserToBook(Integer bookId, Integer userId) {
+        String sql = """
+                UPDATE books
+                SET user_id = ?, loaned = true
+                WHERE bookid = ?
+                """;
+        return jdbcTemplate.update(
+                sql,
+                userId,
+                bookId
+        );
+}}
