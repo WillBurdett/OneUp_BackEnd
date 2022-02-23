@@ -1,5 +1,6 @@
 package com.up.libraryBookingSystem.dao;
 
+import com.up.libraryBookingSystem.ENUMS.GENRES;
 import com.up.libraryBookingSystem.pojo.Books;
 
 import java.util.List;
@@ -21,4 +22,5 @@ public interface BooksDao {
 
     Books selectBookByAuthorId(Integer AuthorId);
 
+    List<Books> displayBooksByGenre(GENRES genre);
 }

@@ -43,7 +43,9 @@ public class AuthorDataAccessService implements AuthorsDao {
                 WHERE name = ?
                 """;
         for (int i = 0; i < displayAuthors().size(); i++) {
-            if (displayAuthors().get(i).getName().equals(authorName)) {
+            if (displayAuthors().get(i).getName()
+                    .toLowerCase(Locale.ROOT)
+                    .equals(authorName.toLowerCase(Locale.ROOT))) {
                return displayAuthors().get(i);
             }
         }

@@ -1,5 +1,6 @@
 package com.up.libraryBookingSystem;
 
+import com.up.libraryBookingSystem.ENUMS.GENRES;
 import com.up.libraryBookingSystem.pojo.Authors;
 import com.up.libraryBookingSystem.pojo.Books;
 import com.up.libraryBookingSystem.pojo.Users;
@@ -64,7 +65,10 @@ public class LibraryController {
 
     //Books
     @GetMapping(path = "books")
-    public List<Books> getBooks() {
+    public List<Books> getBooks(@RequestParam (required = false, value = "genre") GENRES genre) {
+        if (genre != null) {
+            return bookService.displayBooksByGenre(genre);
+        }
         return bookService.displayBooks();
     }
 
@@ -73,6 +77,15 @@ public class LibraryController {
         return bookService.selectBookById(bookId);
     }
 
+    @RequestMapping(value= "/bookTitle", method = RequestMethod.GET) //localhost:8080/bookTitle/?bookTitle=Emma
+    public Books getBookByTitle(@RequestParam(value = "bookTitle") String bookTitle) {
+        return bookService.selectBookByTitle(bookTitle);
+    }
+
+//    @RequestMapping(value= "/bookGenre", method = RequestMethod.GET) //localhost:8080/?bookTitle=Emma
+//    public List<Books> getBooksByGenre(@RequestParam(value = "bookGenre")GENRES genre) {
+//        return bookService.displayBooksByGenre(genre);
+//    }
     //use localhost:8080/books/?isManager=true in postman
     @PostMapping(path = "books", params = "isManager")
     public void addBook(@RequestBody Books book, @RequestParam boolean isManager) {
@@ -92,7 +105,7 @@ public class LibraryController {
     }
 
     //Authors
-    @GetMapping(path = "author")
+    @GetMapping(path = "authors")
     public List<Authors> getAuthors() {
         return authorService.displayAuthors();
     }
@@ -104,7 +117,7 @@ public class LibraryController {
     }
 
    //@GetMapping(params = "author/{name}")
-    @RequestMapping(method = RequestMethod.GET) //localhost:8080/?authorName=Brandon Sanderson
+    @RequestMapping(value= "/authorName", method = RequestMethod.GET) //localhost:8080/authorName/?authorName=Brandon Sanderson
     public Authors getAuthorByName(@RequestParam(value = "authorName") String authorName) {
         return authorService.selectAuthorByName(authorName);
     }

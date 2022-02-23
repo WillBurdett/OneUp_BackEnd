@@ -1,6 +1,8 @@
 package com.up.libraryBookingSystem.service;
 
+import com.up.libraryBookingSystem.ENUMS.GENRES;
 import com.up.libraryBookingSystem.dao.BooksDao;
+import com.up.libraryBookingSystem.pojo.Authors;
 import com.up.libraryBookingSystem.pojo.Books;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -57,6 +59,11 @@ public class BookService {
         return  booksDao.selectBookById(bookId);
     }
 
+    public Books selectBookByTitle(String bookTitle){return booksDao.selectBookByTitle(bookTitle);}
+
+    public List<Books> displayBooksByGenre(GENRES genre) {
+        return booksDao.displayBooksByGenre(genre);
+    }
     //adding book
     //todo: check if book already exists
     //todo: check that every field is filled (not null)

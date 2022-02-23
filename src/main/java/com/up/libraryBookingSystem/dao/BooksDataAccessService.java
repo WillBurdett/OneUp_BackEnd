@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 @Repository("books")
@@ -30,12 +31,18 @@ public class BooksDataAccessService implements BooksDao {
     }
     @Override
     public Books selectBookByTitle(String bookTitle) {
-        List<Books> booksList = displayBooks();
-        for (int i = 0; i < booksList.size() ; i++) {
-            if (booksList.get(i).getTitle()
+      //  List<Books> booksList = displayBooks();
+        String sql = """
+                SELECT bookId, title, genre, author_id, loaned, ISBN
+                FROM books
+                WHERE title = ?
+                """;
+
+        for (int i = 0; i < displayBooks().size() ; i++) {
+            if (displayBooks().get(i).getTitle()
                     .toLowerCase(Locale.ROOT)
                     .equals(bookTitle.toLowerCase(Locale.ROOT))){
-                return booksList.get(i);
+                return displayBooks().get(i);
             }
         }
         return null;
@@ -121,6 +128,29 @@ public class BooksDataAccessService implements BooksDao {
     @Override
     public boolean isLoaned(Books book){
         return book.isLoaned();
+    }
+
+    @Override
+    public List<Books> displayBooksByGenre(GENRES genre) {
+        //  List<Books> booksList = displayBooks();
+        String sql = """
+                SELECT bookId, title, genre, author_id, loaned, ISBN
+                FROM books
+                WHERE genre = ?
+                """;
+        RowMapper<Books> booksRowMapper = ((rs, rowNum) -> {
+            Books book = new Books(
+                    rs.getInt("bookId"),
+                    rs.getString("title"),
+                    GENRES.valueOf(rs.getString("genre").toUpperCase(Locale.ROOT)),
+                    rs.getInt("author_id"),
+                    rs.getBoolean("loaned"),
+                    rs.getInt("ISBN")
+            );
+            return book;
+        });
+        List<Books> books = jdbcTemplate.query(sql, booksRowMapper, genre.name());
+        return books;
     }
 
 }
