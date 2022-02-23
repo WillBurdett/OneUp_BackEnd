@@ -53,7 +53,7 @@ public class UserDataAccessService implements UserDao {
     @Override
     public int deleteUser(Integer userId) {
         String sql = """
-                DELETE * FROM users
+                DELETE FROM users
                 WHERE user_id = ?
                 """;
 
