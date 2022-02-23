@@ -25,29 +25,29 @@ class AuthorServiceTest {
     @Mock
     private AuthorsDao authorsDao;
     private AuthorService underTest;
+
     @BeforeEach
-    void setUp(){
+    void setUp() {
         MockitoAnnotations.openMocks(this);
         authorsDao = Mockito.mock(AuthorsDao.class);
         underTest = new AuthorService(authorsDao);
-
     }
+
     @Test
-    void cannotAddAuthorIfAuthorExist(){
+    void canAddAuthorIfAuthorDoesNotExist() {
         //Given
-        Authors author = new Authors(1,"Alex", Nationality.ENGLISH,null);
+        Authors author = new Authors(1, "Alex", Nationality.ENGLISH, null);
 //
 //        doNothing().when(authorsDao).addAuthors(author);
 //        underTest.addAuthor(author);
         Mockito.when(authorsDao.addAuthors(eq(author))).thenReturn(1);
 //
-        Mockito.when(authorsDao.displayAuthors()).thenReturn(List.of(new Authors(1,"Alex", Nationality.ENGLISH,null)));
+        Mockito.when(authorsDao.displayAuthors()).thenReturn(List.of(new Authors(1, "Alex", Nationality.ENGLISH, null)));
         //When
-
 
         //then
 //        assertThat(expectAlex).isEqualTo(author);
-        assertThatThrownBy(()->{
+        assertThatThrownBy(() -> {
             underTest.addAuthor(author);
             ArgumentCaptor<Authors> authorsArgumentCaptor = ArgumentCaptor.forClass(Authors.class);
             Mockito.verify(authorsDao).addAuthors(authorsArgumentCaptor.capture());
@@ -56,23 +56,4 @@ class AuthorServiceTest {
         }).isInstanceOf(IllegalStateException.class).hasMessage("Author already exists");
         Mockito.verify(authorsDao, Mockito.never()).addAuthors(author);
     }
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

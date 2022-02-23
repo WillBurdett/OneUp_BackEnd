@@ -45,7 +45,7 @@ public class AuthorDataAccessService implements AuthorsDao {
 //                FROM authors
 //                WHERE author_id = ?
 //                """;
-        for (int i = 0; i < displayAuthors().size(); i++) {
+        for (int i = 0; i <= displayAuthors().size(); i++) {
             if (displayAuthors().get(i).getName()
                     .toLowerCase(Locale.ROOT)
                     .equals(authorName.toLowerCase(Locale.ROOT))) {
@@ -84,7 +84,7 @@ public class AuthorDataAccessService implements AuthorsDao {
         RowMapper<Authors> authorsRowMapper = ((rs, rowNum) -> {
             Authors author = new Authors(
                     rs.getInt("author_id"),
-                    rs.getString("name"),
+                    rs.getString("name").toString(),
                     Nationality.valueOf(rs.getString("nationality").toUpperCase(Locale.ROOT)),
                     rs.getString("image")
             );
