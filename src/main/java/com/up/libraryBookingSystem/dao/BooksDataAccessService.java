@@ -114,7 +114,8 @@ public class BooksDataAccessService implements BooksDao {
     public Integer updateBook(Integer bookId, Books bookUpdate){
         String sql = """
                 UPDATE books
-                SET (title, genre, author_id, loaned, ISBN) = (?, ?, ?, ?, ?)              
+                SET (title, genre, author_id, loaned, ISBN) = (?, ?, ?, ?, ?)
+                WHERE bookId = ?             
                 """;
         return jdbcTemplate.update(
                 sql,
@@ -122,7 +123,8 @@ public class BooksDataAccessService implements BooksDao {
                 bookUpdate.getGenre().name(),
                 bookUpdate.getAuthorId(),
                 bookUpdate.isLoaned(),
-                bookUpdate.getISBN()
+                bookUpdate.getISBN(),
+                bookId
         );
     }
 
