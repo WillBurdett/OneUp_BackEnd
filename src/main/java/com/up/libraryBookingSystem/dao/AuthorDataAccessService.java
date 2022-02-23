@@ -68,8 +68,8 @@ public class AuthorDataAccessService implements AuthorsDao {
         int rowsAffected = jdbcTemplate.update(
                 sql,
                 author.getName(),
-                author.getImage(),
-                author.getNationality().name()
+                author.getNationality().name(),
+                author.getImage()
         );
 
         return rowsAffected;
@@ -84,7 +84,7 @@ public class AuthorDataAccessService implements AuthorsDao {
         RowMapper<Authors> authorsRowMapper = ((rs, rowNum) -> {
             Authors author = new Authors(
                     rs.getInt("author_id"),
-                    rs.getString("name").toString(),
+                    rs.getString("name"),
                     Nationality.valueOf(rs.getString("nationality").toUpperCase(Locale.ROOT)),
                     rs.getString("image")
             );
