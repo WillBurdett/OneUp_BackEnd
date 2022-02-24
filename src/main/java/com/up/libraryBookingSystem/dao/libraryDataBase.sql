@@ -19,7 +19,7 @@ CREATE TABLE users (
 );
 
 CREATE TABLE books (
-    id SERIAL PRIMARY KEY,
+    bookid SERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     genre VARCHAR(255) NOT NULL,
     author_id INT REFERENCES authors(author_id),
