@@ -80,14 +80,16 @@ public class UserDataAccessService implements UserDao {
     public int updateUser(Integer userId, Users userUpdate) {
         String sql = """
                 UPDATE users 
-                SET (name, username, isManager, password) = (?, ?, ?, ?)              
+                SET (name, username, isManager, password) = (?, ?, ?, ?)
+                WHERE user_id = ?              
                 """;
         return jdbcTemplate.update(
                 sql,
                 userUpdate.getName(),
                 userUpdate.getUsername(),
                 userUpdate.getManager(),
-                userUpdate.getPassword()
+                userUpdate.getPassword(),
+                userId
         );
     }
 

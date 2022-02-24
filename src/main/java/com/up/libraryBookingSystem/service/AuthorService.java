@@ -58,7 +58,7 @@ public class AuthorService {
     }
 
     public void updateAuthor(Integer authorId, Authors author) {
-        boolean exists = authorExists(authorId);
+      //  boolean exists = authorExists(authorId);
 
         int result = authorsDao.updateAuthor(authorId, author);
 
