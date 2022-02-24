@@ -31,8 +31,8 @@ CREATE TABLE books (
 
 INSERT INTO authors (name, nationality) VALUES ('Jane Austen', 'English');
 
-INSERT INTO books (title, genre, author_id, loaned, ISBN) VALUES ('Emma', 'Classic', 1, FALSE, 1234);
-INSERT INTO books (title, genre, author_id, loaned, ISBN) VALUES ('Pride and Prejudice', 'Classic', 1, FALSE, 12345);
+INSERT INTO books (title, genre, author_id, loaned, ISBN) VALUES ('Emma', 'CLASSIC', 1, FALSE, 1234);
+INSERT INTO books (title, genre, author_id, loaned, ISBN) VALUES ('Pride and Prejudice', 'CLASSIC', 1, FALSE, 12345);
 
 INSERT INTO users (name, username, isManager, password) VALUES ('Yang', 'Yang', TRUE, 'password');
 INSERT INTO users (name, username, isManager, password) VALUES ('Wendy', 'WendyDiane', FALSE, 'password');
