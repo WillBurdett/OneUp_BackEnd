@@ -45,7 +45,7 @@ public class UserService {
             }
             if (hasLetter && hasDigit) {
             } else {
-                throw new IllegalStateException("PASSWORD NOT STRONG");
+                throw new IllegalStateException("PASSWORD NEEDS NUMBERS AND LETTERS");
             }
         } else {
             throw new IllegalStateException("PASSWORD NEEDS AT LEAST 8 CHARACTERS");
