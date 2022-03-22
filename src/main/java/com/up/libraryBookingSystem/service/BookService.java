@@ -6,6 +6,7 @@ import com.up.libraryBookingSystem.pojo.Books;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import javax.xml.ws.http.HTTPException;
 import java.util.List;
 
 @Service
@@ -55,7 +56,9 @@ public class BookService {
     }
 
     public Books selectBookById(Integer bookId) {
-        return  booksDao.selectBookById(bookId);
+
+      booksDao.selectBookById(bookId);
+      return booksDao.selectBookById(bookId);
     }
 
     public Books selectBookByTitle(String bookTitle){return booksDao.selectBookByTitle(bookTitle);}
@@ -67,6 +70,10 @@ public class BookService {
 
     public void assignUserToBook(Integer bookId, Integer userID){
         booksDao.assignUserToBook(bookId, userID);
+    }
+
+    public void returnBookById(Integer bookId) {
+        booksDao.returnBookById(bookId);
     }
     //adding book
     //todo: check if book already exists

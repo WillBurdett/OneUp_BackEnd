@@ -169,4 +169,17 @@ public class BooksDataAccessService implements BooksDao {
                 userId,
                 bookId
         );
-}}
+    }
+    @Override
+    public Integer returnBookById(Integer bookId)  {
+        String sql = """
+                UPDATE books
+                SET user_id = null, loaned = false
+                WHERE bookid = ?
+                """;
+        return jdbcTemplate.update(
+                sql,
+                bookId
+        );
+    }
+}

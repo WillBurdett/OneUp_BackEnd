@@ -94,6 +94,12 @@ public class LibraryController {
         else { throw new IllegalStateException("Access denied.");}
     }
 
+    //------- NEWLY ADDED RETURN BY BOOK ID --------
+    @RequestMapping(value= "/assign/{bookId}", method = RequestMethod.PUT)
+    public void returnBookById(@PathVariable("bookId") Integer bookId) {
+        bookService.returnBookById(bookId);
+    }
+
     @DeleteMapping(path = "books/{id}")
     public void deleteBookById(@PathVariable("id") Integer bookId) {
         bookService.deleteBook(bookId);

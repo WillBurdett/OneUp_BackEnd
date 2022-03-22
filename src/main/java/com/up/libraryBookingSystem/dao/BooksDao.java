@@ -25,4 +25,6 @@ public interface BooksDao {
     List<Books> displayBooksByGenre(GENRES genre);
 
     Integer assignUserToBook(Integer bookId, Integer userId);
+
+    Integer returnBookById(Integer bookId);
 }
