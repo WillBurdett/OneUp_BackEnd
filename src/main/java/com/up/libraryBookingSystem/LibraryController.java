@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.awt.print.Book;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class LibraryController {
@@ -63,7 +64,9 @@ public class LibraryController {
         userService.updateUser(userId, updatedUser);
     }
 
-    //Books
+    //---------------------------- Books -------------------------------------
+
+    // GET BOOKS BY GENRE OR ALL
     @GetMapping(path = "books")
     public List<Books> getBooks(@RequestParam (required = false, value = "genre") GENRES genre) {
         if (genre != null) {
@@ -72,6 +75,15 @@ public class LibraryController {
         return bookService.displayBooks();
     }
 
+    @GetMapping(path = "available-books")
+    public List<Books> getAvailableBooks() {
+        return bookService.displayBooks()
+                .stream()
+                .filter(books -> books.isLoaned() == false)
+                .collect(Collectors.toList());
+    }
+
+    // GET BOOK BY ID
     @GetMapping(path = "books/{id}")
     public Books getBookById(@PathVariable("id") Integer bookId) {
         return bookService.selectBookById(bookId);
