@@ -83,6 +83,14 @@ public class LibraryController {
                 .collect(Collectors.toList());
     }
 
+    @GetMapping(path = "unavailable-books")
+    public List<Books> getUnavailableBooks() {
+        return bookService.displayBooks()
+                .stream()
+                .filter(books -> books.isLoaned() == true)
+                .collect(Collectors.toList());
+    }
+
     // GET BOOK BY ID
     @GetMapping(path = "books/{id}")
     public Books getBookById(@PathVariable("id") Integer bookId) {
