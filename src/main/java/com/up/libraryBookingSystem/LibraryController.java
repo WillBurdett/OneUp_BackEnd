@@ -11,6 +11,7 @@ import org.apache.catalina.User;
 import org.springframework.web.bind.annotation.*;
 
 import java.awt.print.Book;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -91,10 +92,19 @@ public class LibraryController {
                 .collect(Collectors.toList());
     }
 
-    // GET BOOK BY ID
+    // GET BOOK BY ID ORIGINAL
     @GetMapping(path = "books/{id}")
     public Books getBookById(@PathVariable("id") Integer bookId) {
         return bookService.selectBookById(bookId);
+    }
+
+    // GET BOOK BY ID TEST
+    @GetMapping(path = "books/test/{id}")
+    public List<Books> getBookByIdAlternate(@PathVariable("id") Integer bookId) {
+        return bookService.displayBooks()
+                .stream()
+                .filter(books -> books.getBookId() == bookId )
+                .collect(Collectors.toList());
     }
 
     @RequestMapping(value= "books/title/{bookTitle}", method = RequestMethod.GET) //localhost:8080/bookTitle/?bookTitle=Emma
