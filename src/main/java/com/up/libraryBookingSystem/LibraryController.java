@@ -97,8 +97,8 @@ public class LibraryController {
         return bookService.selectBookById(bookId);
     }
 
-    @RequestMapping(value= "/bookTitle", method = RequestMethod.GET) //localhost:8080/bookTitle/?bookTitle=Emma
-    public Books getBookByTitle(@RequestParam(value = "bookTitle") String bookTitle) {
+    @RequestMapping(value= "books/title/{bookTitle}", method = RequestMethod.GET) //localhost:8080/bookTitle/?bookTitle=Emma
+    public Books getBookByTitle(@PathVariable(value = "bookTitle") String bookTitle) {
         return bookService.selectBookByTitle(bookTitle);
     }
 
@@ -114,7 +114,7 @@ public class LibraryController {
         else { throw new IllegalStateException("Access denied.");}
     }
 
-    //------- NEWLY ADDED RETURN BY BOOK ID --------
+    //------- RETURN BY BOOK ID --------
     @RequestMapping(value= "/assign/{bookId}", method = RequestMethod.PUT)
     public void returnBookById(@PathVariable("bookId") Integer bookId) {
         bookService.returnBookById(bookId);
