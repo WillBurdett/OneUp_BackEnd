@@ -1,6 +1,6 @@
-DROP TABLE books;
-DROP TABLE users;
-DROP TABLE authors;
+DROP TABLE IF EXISTS authors CASCADE;
+DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS books CASCADE;
 
 CREATE TABLE authors (
     author_id SERIAL PRIMARY KEY,
@@ -26,15 +26,25 @@ CREATE TABLE books (
     loaned BOOLEAN NOT NULL,
     ISBN INT NOT NULL
 );
+INSERT INTO authors (name, nationality) VALUES
+    ('Jane Austen', 'English'),
+    ('J.R.R Tolkien', 'English'),
+    ('Terry Pratchett', 'English'),
+    ('Douglas R. Hofstadter', 'American');
 
+INSERT INTO books (title, genre, author_id, loaned, ISBN) VALUES
+    ('Emma', 'CLASSIC', 1, FALSE, 11132),
+    ('Pride and Prejudice', 'CLASSIC', 1, FALSE, 11345),
+    ('The Lord of the Rings', 'FANTASY', 2, FALSE, 12353),
+    ('The Silmarillion', 'FANTASY', 2, FALSE, 12683),
+    ('The Hobbit', 'FANTASY', 2, FALSE, 12799),
+    ('The Colour of Magic', 'FANTASY', 3, FALSE, 12954),
+    ('The Light Fantastic', 'FANTASY', 3, FALSE, 13233),
+    ('Godel, Escher, Bach', 'NON_FICTION', 4, FALSE, 13600),
+    ('I am a Strange Loop', 'NON_FICTION', 4, FALSE, 13602);
 
-INSERT INTO authors (name, nationality) VALUES ('Jane Austen', 'English');
-
-INSERT INTO books (title, genre, author_id, loaned, ISBN) VALUES ('Emma', 'CLASSIC', 1, FALSE, 1234);
-INSERT INTO books (title, genre, author_id, loaned, ISBN) VALUES ('Pride and Prejudice', 'CLASSIC', 1, FALSE, 12345);
-
-INSERT INTO users (name, username, isManager, password) VALUES ('Yang', 'Yang', TRUE, 'password');
-INSERT INTO users (name, username, isManager, password) VALUES ('Wendy', 'WendyDiane', FALSE, 'password');
-INSERT INTO users (name, username, isManager, password) VALUES ('Michelle', 'Michelle', FALSE, 'password');
-INSERT INTO users (name, username, isManager, password) VALUES ('Connie', 'ConnieB', FALSE, 'password');
-
+INSERT INTO users (name, username, isManager, password) VALUES
+    ('Yang', 'Yang', TRUE, 'password'),
+    ('Wendy', 'WendyDiane', FALSE, 'password'),
+    ('Michelle', 'Michelle', FALSE, 'password'),
+    ('Connie', 'ConnieB', FALSE, 'password');
